@@ -38,6 +38,7 @@ typedef struct AVSDLLVideoInfo {
 	int nchannels;
 	int num_audio_frames;
 	int64_t num_audio_samples;
+	unsigned int channelMask;
 } AVSDLLVideoInfo;
 
 typedef struct AVSDLLVideoPlane {

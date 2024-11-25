@@ -15,9 +15,9 @@
 #include <windows.h>
 
 // include the necessary avisynth.h files
-#define AVISYNTH_INTERFACE_BUILD_VERSION 8
+#define AVISYNTH_INTERFACE_BUILD_VERSION 6
 
-#if AVISYNTH_INTERFACE_BUILD_VERSION >= 8
+#if AVISYNTH_INTERFACE_BUILD_VERSION >= 6
 #include ".\avs_core_10\avisynth.h"
 #elif AVISYNTH_INTERFACE_BUILD_VERSION > 6
 #include ".\avs_core_8\avisynth.h"
@@ -427,6 +427,10 @@ int __stdcall dimzon_avs_init(SafeStruct** ppstr, char *func, char *arg, AVSDLLV
 			vi->num_audio_samples = inf.num_audio_samples;
 			vi->sample_type = inf.sample_type;
 			vi->nchannels = inf.nchannels;
+			if (AvsVersion::AVISYNTH_INTERFACE_VERSION >= 10)
+				vi->channelMask = inf.GetChannelMask();
+			else
+				vi->channelMask = 0;
 		}
 
 		pstr->res = new AVSValue(res);
@@ -567,6 +571,10 @@ int __stdcall dimzon_avs_init_2(SafeStruct** ppstr, char *func, char *arg, AVSDL
 			vi->num_audio_samples = inf.num_audio_samples;
 			vi->sample_type = inf.sample_type;
 			vi->nchannels = inf.nchannels;
+			if (AvsVersion::AVISYNTH_INTERFACE_VERSION >= 10)
+				vi->channelMask = inf.GetChannelMask();
+			else
+				vi->channelMask = 0;
 		}
 
 		pstr->res = new AVSValue(res);
@@ -678,6 +686,10 @@ int __stdcall dimzon_avs_init_3(SafeStruct** ppstr, char *func, char *arg, AVSDL
 			vi->num_audio_samples = inf.num_audio_samples;
 			vi->sample_type = inf.sample_type;
 			vi->nchannels = inf.nchannels;
+			if (AvsVersion::AVISYNTH_INTERFACE_VERSION >= 10)
+				vi->channelMask = inf.GetChannelMask();
+			else
+				vi->channelMask = 0;
 		}
 
 		pstr->res = new AVSValue(res);
